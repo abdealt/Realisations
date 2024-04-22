@@ -1,0 +1,1301 @@
+from graphics import*
+from random import*
+from partie_A import*
+
+Largeur=800
+Hauteur=700
+
+#f=init_graphics(Largeur,Hauteur)
+
+
+largeur_voiture=50
+longeur_voiture=100
+gris_fonce=(50,50,50)
+noir_eclaircie=(30,30,30)
+#fill_screen(gris_fonce,f)
+
+liste_couleur_voiture=[0xB8860B,0xA9A9A9,floralwhite,darkorange,darkgreen,cyan,cornflowerblue,chocolate,rouge,argent,bleu,jaune]
+
+
+class Voiture:
+    def __init__(self):
+        self.coul_a=()
+        l=len(liste_couleur_voiture)
+        a=randint(0,l-1)
+        self.coul_a=liste_couleur_voiture[a]
+        self.coul_b=()
+        if self.coul_a==noir or self.coul_a==blanc or self.coul_a==gris:
+            self.coul_b=rouge
+        else:
+            self.coul_b=noir
+
+    def vehicule(self,p1,direction,coul):
+        #explication pour l'argument direction:
+        #gauche=0
+        #haut=1
+        #droite=2
+        #bas=3
+        if coul==0:
+            a=self.coul_a
+            b=self.coul_b
+            c=noir_eclaircie
+        elif coul==1:
+            a=gris_fonce
+            b=gris_fonce
+            c=gris_fonce
+        if direction==0:
+            (x,y)=p1
+            x2=x+longeur_voiture
+            y2=y+largeur_voiture
+            p2=(x2,y2)
+            #roues du bas
+            x3=x+20
+            y3=y2
+            x4=x3+10
+            y4=y3+2
+            x5=x2-20
+            y5=y3
+            x6=x5-10
+            y6=y4
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_ellipse(p3,p4,c,f)
+            draw_fill_ellipse(p5,p6,c,f)
+            #roues du haut
+            x3=x+20
+            y3=y
+            x4=x3+10
+            y4=y3-2
+            x5=x2-20
+            y5=y3
+            x6=x5-10
+            y6=y4
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_ellipse(p3,p4,c,f)
+            draw_fill_ellipse(p5,p6,c,f)
+            #carroserie
+            draw_fill_rectangle(p1,p2,a,f)
+            #bande
+            x3=x
+            y3=y+15
+            x4=x+20
+            y4=y3+5
+            x5=x
+            y5=y2-15
+            x6=x4
+            y6=y5-5
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_rectangle(p3,p4,b,f)
+            draw_fill_rectangle(p5,p6,b,f)
+            #pare_brise
+            x3=x+25
+            y3=y+5
+            x4=x3+20
+            y4=y2-5
+            p3=(x3,y3)
+            p4=(x4,y4)
+            draw_fill_rectangle(p3,p4,c,f)
+
+        elif direction==1:
+            (x,y)=p1
+            x2=x+largeur_voiture
+            y2=y+longeur_voiture
+            p2=(x2,y2)
+            #roues de droite
+            x3=x2
+            y3=y+20
+            x4=x3+2
+            y4=y3+10
+            x5=x3
+            y5=y2-20
+            x6=x4
+            y6=y5-10
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_ellipse(p3,p4,c,f)
+            draw_fill_ellipse(p5,p6,c,f)
+            #roues de gauche
+            x3=x
+            y3=y+20
+            x4=x3-2
+            y4=y3+10
+            x5=x3
+            y5=y2-20
+            x6=x4
+            y6=y5-10
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_ellipse(p3,p4,c,f)
+            draw_fill_ellipse(p5,p6,c,f)
+            #carroserie
+            draw_fill_rectangle(p1,p2,a,f)
+            #bande
+            x3=x+15
+            y3=y
+            x4=x3+5
+            y4=y+20
+            x5=x2-15
+            y5=y
+            x6=x5-5
+            y6=y4
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_rectangle(p3,p4,b,f)
+            draw_fill_rectangle(p5,p6,b,f)
+            #pare_brise
+            x3=x+5
+            y3=y+25
+            x4=x2-5
+            y4=y3+20
+            p3=(x3,y3)
+            p4=(x4,y4)
+            draw_fill_rectangle(p3,p4,c,f)
+
+        elif direction==2:
+            (x,y)=p1
+            x=x+longeur_voiture
+            y=y
+            p1=(x,y)
+            x2=x-longeur_voiture
+            y2=y+largeur_voiture
+            p2=(x2,y2)
+            #roues du bas
+            x3=x-20
+            y3=y2
+            x4=x3-10
+            y4=y3+2
+            x5=x2+20
+            y5=y3
+            x6=x5+10
+            y6=y4
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_ellipse(p3,p4,c,f)
+            draw_fill_ellipse(p5,p6,c,f)
+            #roues du haut
+            x3=x-20
+            y3=y
+            x4=x3-10
+            y4=y3-2
+            x5=x2+20
+            y5=y3
+            x6=x5+10
+            y6=y4
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_ellipse(p3,p4,c,f)
+            draw_fill_ellipse(p5,p6,c,f)
+            #carroserie
+            draw_fill_rectangle(p1,p2,a,f)
+            #bande
+            x3=x
+            y3=y+15
+            x4=x-20
+            y4=y3+5
+            x5=x
+            y5=y2-15
+            x6=x4
+            y6=y5-5
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_rectangle(p3,p4,b,f)
+            draw_fill_rectangle(p5,p6,b,f)
+            #pare_brise
+            x3=x-25
+            y3=y+5
+            x4=x3-20
+            y4=y2-5
+            p3=(x3,y3)
+            p4=(x4,y4)
+            draw_fill_rectangle(p3,p4,c,f)
+
+        elif direction==3:
+            (x,y)=p1
+            x2=x+largeur_voiture
+            y2=y+longeur_voiture
+            p2=(x2,y2)
+            #roues de droite
+            x3=x2
+            y3=y+20
+            x4=x3+2
+            y4=y3+10
+            x5=x3
+            y5=y2-20
+            x6=x4
+            y6=y5-10
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_ellipse(p3,p4,c,f)
+            draw_fill_ellipse(p5,p6,c,f)
+            #roues de gauche
+            x3=x
+            y3=y+20
+            x4=x3-2
+            y4=y3+10
+            x5=x3
+            y5=y2-20
+            x6=x4
+            y6=y5-10
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_ellipse(p3,p4,c,f)
+            draw_fill_ellipse(p5,p6,c,f)
+            #carroserie
+            draw_fill_rectangle(p1,p2,a,f)
+            #bande
+            x3=x+15
+            y3=y2
+            x4=x3+5
+            y4=y2-20
+            x5=x2-15
+            y5=y3
+            x6=x5-5
+            y6=y4
+            p3=(x3,y3)
+            p4=(x4,y4)
+            p5=(x5,y5)
+            p6=(x6,y6)
+            draw_fill_rectangle(p3,p4,b,f)
+            draw_fill_rectangle(p5,p6,b,f)
+            #pare_brise
+            x3=x+5
+            y3=y2-25
+            x4=x2-5
+            y4=y3-20
+            p3=(x3,y3)
+            p4=(x4,y4)
+            draw_fill_rectangle(p3,p4,c,f)
+
+        else:
+            ()
+
+    def avancer_gauche(self,p1,distance):
+        a=distance/5
+        a=int(a)
+        (x,y)=p1
+        affiche_auto_off()
+        for i in range (a):
+            attendre(70)
+            self.vehicule(p1,0,1)
+            x=x-5
+            p1=(x,y)
+            self.vehicule(p1,0,0)
+            affiche_all()
+    def avancer_droite(self,p1,distance):
+        a=distance/5
+        a=int(a)
+        (x,y)=p1
+        affiche_auto_off()
+        for i in range (a):
+            attendre(70)
+            self.vehicule(p1,2,1)
+            x=x+5
+            p1=(x,y)
+            self.vehicule(p1,2,0)
+            affiche_all()
+    def avancer_haut(self,p1,distance):
+        a=distance/5
+        a=int(a)
+        (x,y)=p1
+        affiche_auto_off()
+        for i in range (a):
+            attendre(70)
+            self.vehicule(p1,1,1)
+            y=y-5
+            p1=(x,y)
+            self.vehicule(p1,1,0)
+            affiche_all()
+    def avancer_bas(self,p1,distance):
+        a=distance/5
+        a=int(a)
+        (x,y)=p1
+        affiche_auto_off()
+        for i in range (a):
+            attendre(70)
+            self.vehicule(p1,3,1)
+            y=y+5
+            p1=(x,y)
+            self.vehicule(p1,3,0)
+            affiche_all()
+    def reculer_gauche(self,p1,distance):
+        a=distance/5
+        a=int(a)
+        (x,y)=p1
+        affiche_auto_off()
+        for i in range (a):
+            attendre(70)
+            self.vehicule(p1,0,1)
+            x=x+5
+            p1=(x,y)
+            self.vehicule(p1,0,0)
+            affiche_all()
+    def reculer_droite(self,p1,distance):
+        a=distance/5
+        a=int(a)
+        (x,y)=p1
+        affiche_auto_off()
+        for i in range (a):
+            attendre(70)
+            self.vehicule(p1,2,1)
+            x=x-5
+            p1=(x,y)
+            self.vehicule(p1,2,0)
+            affiche_all()
+    def reculer_haut(self,p1,distance):
+        a=distance/5
+        a=int(a)
+        (x,y)=p1
+        affiche_auto_off()
+        for i in range (a):
+            attendre(70)
+            self.vehicule(p1,1,1)
+            y=y+5
+            p1=(x,y)
+            self.vehicule(p1,1,0)
+            affiche_all()
+    def reculer_bas(self,p1,distance):
+        a=distance/5
+        a=int(a)
+        (x,y)=p1
+        affiche_auto_off()
+        for i in range (a):
+            attendre(70)
+            self.vehicule(p1,3,1)
+            y=y-5
+            p1=(x,y)
+            self.vehicule(p1,3,0)
+            affiche_all()
+
+
+
+    def place2_attente_vers_place1_attente(self):
+        self.vehicule(place2_attente,1,1)
+        self.avancer_haut(place2_attente,longeur_de_la_place)
+    def nouvelle_vers_place2_attente(self):
+        self.avancer_haut((Largeur-distance_route_arrivé_bord-largeur_de_la_place+5,Hauteur),100)
+    def chemin_aller_place1(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200)
+        self.vehicule((x,y-200),1,1)
+        p1=(longeur_de_la_place-15,15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+
+    def chemin_aller_place2(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place)
+        self.vehicule((x,y-200+largeur_de_la_place),1,1)
+        p1=(longeur_de_la_place-15,largeur_de_la_place+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+    def chemin_aller_place3(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*2)
+        self.vehicule((x,y-200+largeur_de_la_place*2),1,1)
+        p1=(longeur_de_la_place-15,largeur_de_la_place*2+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+    def chemin_aller_place4(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*3)
+        self.vehicule((x,y-200+largeur_de_la_place*3),1,1)
+        attendre(500)
+        affiche_all()
+        p1=(longeur_de_la_place-15,largeur_de_la_place*3+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+    def chemin_aller_place5(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*4)
+        self.vehicule((x,y-200+largeur_de_la_place*3+5),1,1)
+        p1=(longeur_de_la_place-15,largeur_de_la_place*4+15)
+        attendre(500)
+        affiche_all()
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+    def chemin_aller_place6(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200)
+        self.vehicule((x,y-200),1,1)
+        p1=(longeur_de_la_place*2,15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+
+    def chemin_aller_place7(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place)
+        self.vehicule((x,y-200+largeur_de_la_place),1,1)
+        p1=(longeur_de_la_place*2,largeur_de_la_place+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+    def chemin_aller_place8(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*2)
+        self.vehicule((x,y-200+largeur_de_la_place*2),1,1)
+        p1=(longeur_de_la_place*2,largeur_de_la_place*2+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+    def chemin_aller_place9(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*3)
+        self.vehicule((x,y-200+largeur_de_la_place*3),1,1)
+        attendre(500)
+        affiche_all()
+        p1=(longeur_de_la_place*2,largeur_de_la_place*3+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+    def chemin_aller_place10(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,300)
+        self.vehicule((x-300,y),0,1)
+        p1=(longeur_de_la_place*2,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*4)
+        self.vehicule((x,y-200+largeur_de_la_place*3+5),1,1)
+        attendre(500)
+        affiche_all()
+        p1=(longeur_de_la_place*2,largeur_de_la_place*4+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+    def chemin_aller_place11(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200)
+        self.vehicule((x,y-200),1,1)
+        p1=(longeur_de_la_place*4+40,15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+
+    def chemin_aller_place12(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place)
+        self.vehicule((x,y-200+largeur_de_la_place),1,1)
+        p1=(longeur_de_la_place*4+40,largeur_de_la_place+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+    def chemin_aller_place13(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*2)
+        self.vehicule((x,y-200+largeur_de_la_place*2),1,1)
+        p1=(longeur_de_la_place*4+40,largeur_de_la_place*2+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+    def chemin_aller_place14(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(500)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*3)
+        self.vehicule((x,y-200+largeur_de_la_place*3),1,1)
+        attendre(500)
+        affiche_all()
+        p1=(longeur_de_la_place*4+40,largeur_de_la_place*3+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+    def chemin_aller_place15(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*4)
+        self.vehicule((x,y-200+largeur_de_la_place*3+5),1,1)
+        attendre(500)
+        affiche_all()
+        p1=(longeur_de_la_place*4+40,largeur_de_la_place*4+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_gauche(p1,75)
+    def chemin_aller_place16(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200)
+        self.vehicule((x,y-200),1,1)
+        p1=(longeur_de_la_place*6-50,15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+
+    def chemin_aller_place17(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place)
+        self.vehicule((x,y-200+largeur_de_la_place),1,1)
+        p1=(longeur_de_la_place*6-50,largeur_de_la_place+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+    def chemin_aller_place18(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*2)
+        self.vehicule((x,y-200+largeur_de_la_place*2),1,1)
+        p1=(longeur_de_la_place*6-50,largeur_de_la_place*2+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+    def chemin_aller_place19(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*3)
+        self.vehicule((x,y-200+largeur_de_la_place*3),1,1)
+        attendre(500)
+        affiche_all()
+        p1=(longeur_de_la_place*6-50,largeur_de_la_place*3+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+    def chemin_aller_place20(self):
+        self.vehicule(place1_attente,1,0)
+        p1=place1_attente
+        (x,y)=p1
+        barrière_B_ouverte(rouge)
+        attendre(1000)
+        self.avancer_haut(p1,70)
+        self.vehicule((x,y-70),1,1)
+        p1=(longeur_de_la_place*6-50,Hauteur-450)
+        (x,y)=p1
+        barrière_B_fermee(rouge)
+        self.vehicule(p1,1,0)
+        self.avancer_haut(p1,200-largeur_de_la_place*4)
+        self.vehicule((x,y-200+largeur_de_la_place*3+5),1,1)
+        attendre(500)
+        affiche_all()
+        p1=(longeur_de_la_place*6-50,largeur_de_la_place*4+15)
+        (x,y)=p1
+        self.vehicule(p1,0,0)
+        self.avancer_droite(p1,largeur_de_la_place+10)
+
+
+
+
+    def chemin_retour_place1(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,10,10)
+        self.vehicule(place1,0,0)
+        self.reculer_gauche(place1,80)
+        attendre(200)
+        self.vehicule((95,15),0,1)
+        self.vehicule((longeur_de_la_place+25,15),3,0)
+        self.avancer_bas((longeur_de_la_place+25,15),250)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place2(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,10,10+largeur_de_la_place*1)
+        self.vehicule(place2,0,0)
+        self.reculer_gauche(place2,80)
+        attendre(200)
+        self.vehicule((95,15+largeur_de_la_place*1),0,1)
+        self.vehicule((longeur_de_la_place+25,15+largeur_de_la_place*1),3,0)
+        self.avancer_bas((longeur_de_la_place+25,15+largeur_de_la_place*1),250-largeur_de_la_place*1)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place3(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,10,10+largeur_de_la_place*2)
+        self.vehicule(place3,0,0)
+        self.reculer_gauche(place3,80)
+        attendre(200)
+        self.vehicule((95,15+largeur_de_la_place*2),0,1)
+        self.vehicule((longeur_de_la_place+25,15+largeur_de_la_place*2),3,0)
+        self.avancer_bas((longeur_de_la_place+25,15+largeur_de_la_place*2),250-largeur_de_la_place*2)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place4(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,10,10+largeur_de_la_place*3)
+        self.vehicule(place4,0,0)
+        self.reculer_gauche(place4,80)
+        attendre(200)
+        self.vehicule((95,15+largeur_de_la_place*3),0,1)
+        self.vehicule((longeur_de_la_place+25,15+largeur_de_la_place*3),3,0)
+        self.avancer_bas((longeur_de_la_place+25,15+largeur_de_la_place*3),250-largeur_de_la_place*3)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place5(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,10,10+largeur_de_la_place*4)
+        self.vehicule(place5,0,0)
+        self.reculer_gauche(place5,80)
+        attendre(200)
+        self.vehicule((95,15+largeur_de_la_place*4),0,1)
+        self.vehicule((longeur_de_la_place+25,15+250),3,0)
+        affiche_all()
+        attendre(500)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place6(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,400,10)
+        self.vehicule(place6,2,0)
+        self.reculer_droite(place6,80)
+        attendre(200)
+        self.vehicule((400-90-longeur_voiture,15),0,1)
+        self.vehicule((longeur_de_la_place+25,15),3,0)
+        self.avancer_bas((longeur_de_la_place+25,15),250)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place7(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,400,10+largeur_de_la_place*1)
+        self.vehicule(place7,2,0)
+        self.reculer_droite(place7,80)
+        attendre(200)
+        self.vehicule((400-90-longeur_voiture,15+largeur_de_la_place*1),0,1)
+        self.vehicule((longeur_de_la_place+25,15+largeur_de_la_place*1),3,0)
+        self.avancer_bas((longeur_de_la_place+25,15+largeur_de_la_place*1),250-largeur_de_la_place*1)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place8(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,400,10+largeur_de_la_place*2)
+        self.vehicule(place8,2,0)
+        self.reculer_droite(place8,80)
+        attendre(200)
+        self.vehicule((400-90-longeur_voiture,15+largeur_de_la_place*2),0,1)
+        self.vehicule((longeur_de_la_place+25,15+largeur_de_la_place*2),3,0)
+        self.avancer_bas((longeur_de_la_place+25,15+largeur_de_la_place*2),250-largeur_de_la_place*2)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place9(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,400,10+largeur_de_la_place*3)
+        self.vehicule(place9,2,0)
+        self.reculer_droite(place9,80)
+        attendre(200)
+        self.vehicule((400-90-longeur_voiture,15+largeur_de_la_place*3),0,1)
+        self.vehicule((longeur_de_la_place+25,15+largeur_de_la_place*3),3,0)
+        self.avancer_bas((longeur_de_la_place+25,15+largeur_de_la_place*3),250-largeur_de_la_place*3)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place10(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,400,10+largeur_de_la_place*4)
+        self.vehicule(place10,2,0)
+        self.reculer_droite(place10,80)
+        attendre(200)
+        self.vehicule((400-90-longeur_voiture,15+largeur_de_la_place*4),0,1)
+        self.vehicule((longeur_de_la_place+25,15+250),3,0)
+        affiche_all()
+        attendre(500)
+        self.vehicule((longeur_de_la_place+25,15+250),3,1)
+        p1=(distance_route_arrivé_bord+largeur_de_la_place-35,bas_du_parking-largeur_de_la_place*2+10)
+        (x,y)=p1
+        self.vehicule(p1,2,0)
+        self.avancer_droite(p1,320)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        self.vehicule((x+320,y),2,1)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+
+
+
+
+
+    def chemin_retour_place11(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,400,10)
+        self.vehicule(place11,0,0)
+        self.reculer_gauche(place11,80)
+        attendre(200)
+        self.vehicule((400+85,15),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15),3,0)
+        self.avancer_bas((400+longeur_de_la_place+25,15),250)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place12(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,400,10+largeur_de_la_place*1)
+        self.vehicule(place12,0,0)
+        self.reculer_gauche(place12,80)
+        attendre(200)
+        self.vehicule((400+85,15+largeur_de_la_place*1),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15+largeur_de_la_place*1),3,0)
+        self.avancer_bas((400+longeur_de_la_place+25,15+largeur_de_la_place*1),250-largeur_de_la_place*1)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place13(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,400,10+largeur_de_la_place*2)
+        self.vehicule(place13,0,0)
+        self.reculer_gauche(place13,80)
+        attendre(200)
+        self.vehicule((400+85,15+largeur_de_la_place*2),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15+largeur_de_la_place*2),3,0)
+        self.avancer_bas((400+longeur_de_la_place+25,15+largeur_de_la_place*2),250-largeur_de_la_place*2)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place14(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,400,10+largeur_de_la_place*3)
+        self.vehicule(place14,0,0)
+        self.reculer_gauche(place14,80)
+        attendre(200)
+        self.vehicule((400+85,15+largeur_de_la_place*3),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15+largeur_de_la_place*3),3,0)
+        self.avancer_bas((400+longeur_de_la_place+25,15+largeur_de_la_place*3),250-largeur_de_la_place*3)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place15(self):
+        place_de_parking_gauche(longeur_de_la_place,largeur_de_la_place,400,10+largeur_de_la_place*4)
+        self.vehicule(place15,0,0)
+        self.reculer_gauche(place15,80)
+        attendre(200)
+        self.vehicule((400+85,15+largeur_de_la_place*4),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,0)
+        affiche_all()
+        attendre(500)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place16(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,Largeur-10,10)
+        self.vehicule(place16,2,0)
+        self.reculer_droite(place16,80)
+        attendre(200)
+        self.vehicule((Largeur-90-longeur_voiture,15),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15),3,0)
+        self.avancer_bas((400+longeur_de_la_place+25,15),250)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place17(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,Largeur-10,10+largeur_de_la_place*1)
+        self.vehicule(place17,2,0)
+        self.reculer_droite(place17,80)
+        attendre(200)
+        self.vehicule((Largeur-90-longeur_voiture,15+largeur_de_la_place*1),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15+largeur_de_la_place*1),3,0)
+        self.avancer_bas((400+longeur_de_la_place+25,15+largeur_de_la_place*1),250-largeur_de_la_place*1)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place18(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,Largeur-10,10+largeur_de_la_place*2)
+        self.vehicule(place18,2,0)
+        self.reculer_droite(place18,80)
+        attendre(200)
+        self.vehicule((Largeur-90-longeur_voiture,15+largeur_de_la_place*2),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15+largeur_de_la_place*2),3,0)
+        self.avancer_bas((400+longeur_de_la_place+25,15+largeur_de_la_place*2),250-largeur_de_la_place*2)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place19(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,Largeur-10,10+largeur_de_la_place*3)
+        self.vehicule(place19,2,0)
+        self.reculer_droite(place19,80)
+        attendre(200)
+        self.vehicule((Largeur-90-longeur_voiture,15+largeur_de_la_place*3),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15+largeur_de_la_place*3),3,0)
+        self.avancer_bas((400+longeur_de_la_place+25,15+largeur_de_la_place*3),250-largeur_de_la_place*3)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        attendre(500)
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+    def chemin_retour_place20(self):
+        place_de_parking_droite(longeur_de_la_place,largeur_de_la_place,Largeur-10,10+largeur_de_la_place*4)
+        self.vehicule(place20,2,0)
+        self.reculer_droite(place20,80)
+        attendre(200)
+        self.vehicule((Largeur-90-longeur_voiture,15+largeur_de_la_place*4),0,1)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,0)
+        affiche_all()
+        attendre(500)
+        self.vehicule((400+longeur_de_la_place+25,15+250),3,1)
+        attendre(500)
+        barrière_A_ouverte(rouge)
+        affiche_all()
+        p1=(Largeur-distance_route_arrivé_bord-largeur_de_la_place*2,bas_du_parking-60)
+        (x,y)=p1
+        self.vehicule(p1,3,0)
+        self.avancer_bas(p1,120)
+        barrière_A_fermee(rouge)
+        self.avancer_bas((x,y+120),300)
+
+
+#valeurs
+gris_fonce=(50,50,50)
+distance_route_arrivé_bord=120
+largeur_de_la_place=65
+longeur_de_la_place=110
+bas_du_parking=Hauteur-215
+place1_attente=(Largeur-distance_route_arrivé_bord-largeur_de_la_place+5,bas_du_parking+10)
+place2_attente=(Largeur-distance_route_arrivé_bord-largeur_de_la_place+5,bas_du_parking+longeur_de_la_place+10)
+place1=(15,15)
+place2=(15,15+largeur_de_la_place*1)
+place3=(15,15+largeur_de_la_place*2)
+place4=(15,15+largeur_de_la_place*3)
+place5=(15,15+largeur_de_la_place*4)
+place6=(400-longeur_de_la_place,15)
+place7=(400-longeur_de_la_place,15+largeur_de_la_place*1)
+place8=(400-longeur_de_la_place,15+largeur_de_la_place*2)
+place9=(400-longeur_de_la_place,15+largeur_de_la_place*3)
+place10=(400-longeur_de_la_place,15+largeur_de_la_place*4)
+place11=(405,15)
+place12=(405,15+largeur_de_la_place*1)
+place13=(405,15+largeur_de_la_place*2)
+place14=(405,15+largeur_de_la_place*3)
+place15=(405,15+largeur_de_la_place*4)
+place16=(Largeur-longeur_de_la_place,15)
+place17=(Largeur-longeur_de_la_place,15+largeur_de_la_place*1)
+place18=(Largeur-longeur_de_la_place,15+largeur_de_la_place*2)
+place19=(Largeur-longeur_de_la_place,15+largeur_de_la_place*3)
+place20=(Largeur-longeur_de_la_place,15+largeur_de_la_place*4)
+#zone de test
+
+matière_du_sol()
+
+
+"""
+wait_escape(f)
+quit_graphics()"""
